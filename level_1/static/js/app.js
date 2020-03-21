@@ -19,7 +19,7 @@ events and search through the `date/time` column to find rows that match user in
 
 var inputField = d3.select("#datetime");
 
-function handleFiltering(event) {
+function handleFiltering() {
 
   d3.event.preventDefault();
 

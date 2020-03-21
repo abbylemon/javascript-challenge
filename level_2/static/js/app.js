@@ -23,43 +23,49 @@ events and search through the `date/time` column to find rows that match user in
 // label.attr("for", "city");
 // label.text("")
 
-var datetime = d3.select("#datetime");
-var city = d3.select("#city");
-var state = d3.select("#state");
-var country = d3.select("#country");
-var shape = d3.select("#shape");
-var filterlist = [];
-filterlist.push(datetime, city, state, country, shape);
+// var datetime = d3.select("#datetime");
+// var city = d3.select("#city");
+// var state = d3.select("#state");
+// var country = d3.select("#country");
+// var shape = d3.select("#shape");
+// var filterlist = [];
+// filterlist.push(datetime, city, state, country, shape);
 
+var datakey = ["datetime", "city", "state", "county", "shape"];
+// var htmlID = datakey.map(header => "#" + header);
 
+var button = d3.select("#filter-btn");
 
 function handleFiltering() {
   console.log("started filtering");
 
-  filterlist.forEach(function(search) {
-    console.log("starting for loop");
+  d3.event.preventDefault();
 
-    d3.event.preventDefault();
+  datakey.forEach(function(searchValue) {
+    console.log("starting for loop for " + searchValue);
 
-    var newSearch = d3.event.target.value;
-    console.log(newSearch);
+    var search = d3.select("#" + searchValue).value;
+    console.log(search);
 
-    var filteredData = tableData.filter(filterSearch => filterSearch.search === newSearch);
-    console.log(filteredData);
+    if (search != "") {
 
-    var tbody = d3.select("tbody");
-
-    filteredData.forEach(function(ufoReport) {
-      var row = tbody.append("tr");
-
-      Object.entries(ufoReport).forEach(function([key,value]) {
-        console.log(key, value);
-
-        var cell = tbody.append("td");
-        cell.text(value);
-      })
-    })
+      var filteredData = tableData.filter(filterSearch => filterSearch.searchValue === datetime);
+      console.log(filteredData);
+  
+      var tbody = d3.select("tbody");
+  
+      filteredData.forEach(function(ufoReport) {
+        var row = tbody.append("tr");
+  
+        Object.entries(ufoReport).forEach(function([key,value]) {
+          // console.log(key, value);
+  
+          var cell = tbody.append("td");
+          cell.text(value);
+        });
+      });
+    }
   });
 }
 
-inputField.on("change", handleFiltering);
+button.on("click", handleFiltering);

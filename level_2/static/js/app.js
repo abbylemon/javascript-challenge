@@ -94,7 +94,5 @@ function drawTable(ufoData) {
       cell.text(value);
 
     });
-
   });
-
 }

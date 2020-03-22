@@ -35,12 +35,11 @@ function handleFiltering() {
     var row = tbody.append("tr");
 
     Object.entries(ufoReport).forEach(function([key,value]) {
-      console.log(key, value);
 
       var cell = tbody.append("td");
       cell.text(value);
-    })
-  })
+    });
+  });
 }
 
 inputField.on("change", handleFiltering);
